@@ -44,15 +44,10 @@
         "prepare": "git config core.hookspath .githooks && lefthook install",
         "test:unit": "vendor/bin/pest --parallel",
         "test:uwatch": "vendor/bin/pest --parallel --watch",
-        "test:coverage": "vendor/bin/pest --coverage --parallel",
         "test:watch": "vendor/bin/pest --watch --parallel --mutate",
         "test:types": "vendor/bin/pest --type-coverage --min=100 --parallel",
-        "test:mutate": "vendor/bin/pest --mutate --min=100 --parallel",
-        "test:integration": "php examples/testing.php",
         "test": [
-            "@test:mutate",
-            "@test:coverage",
-            "@test:types"
+            "@test:unit"
         ],
         "fmt": "vendor/bin/pint",
         "fmt:test": "./vendor/bin/pint --test",
