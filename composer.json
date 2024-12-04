@@ -30,8 +30,8 @@
         "phpstan/phpstan-deprecation-rules": "^2.0",
         "phpstan/phpstan-phpunit": "^2.0",
         "phpstan/extension-installer": "^1.4",
-        "rector/rector": "^2.0.0-rc1",
-        "pestphp/pest": "^3.5",
+        "rector/rector": "^2.0.0-rc2",
+        "pestphp/pest": "^3.6",
         "pestphp/pest-plugin-watch": "^3.0"
     },
     "config": {
@@ -46,9 +46,6 @@
         "test:uwatch": "vendor/bin/pest --parallel --watch",
         "test:watch": "vendor/bin/pest --watch --parallel --mutate",
         "test:types": "vendor/bin/pest --type-coverage --min=100 --parallel",
-        "test": [
-            "@test:unit"
-        ],
         "fmt": "vendor/bin/pint",
         "fmt:test": "./vendor/bin/pint --test",
         "lint": "vendor/bin/phpstan analyze",
@@ -56,7 +53,7 @@
         "refactor": "vendor/bin/rector process",
         "refactor:test": "vendor/bin/rector process --dry-run",
         "check": [
-            "@test",
+            "@test:unit",
             "@fmt:test",
             "@lint",
             "@refactor:test"

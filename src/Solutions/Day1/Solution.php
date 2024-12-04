@@ -31,7 +31,7 @@ final class Solution
     private static function loadListData(string $input): array
     {
         // Split input into lines and parse into two arrays
-        $lines = array_filter(explode("\n", trim($input)));
+        $lines = explode("\n", trim($input));
         $leftList = [];
         $rightList = [];
 
@@ -55,20 +55,17 @@ final class Solution
      */
     private static function calculateTotalDistance(array $leftList, array $rightList): int
     {
-        // Sort both lists independently
         sort($leftList);
         sort($rightList);
+        $index = 0;
 
-        // Calculate total distance between corresponding elements
-        $totalDistance = 0;
-        $counter = count($leftList);
+        return array_reduce($leftList, function (int $carry, int $value) use (&$index, $rightList): float|int {
+            $distance = abs($value - $rightList[$index]);
+            $carry += $distance;
+            $index++;
 
-        for ($i = 0; $i < $counter; $i++) {
-            $distance = abs($leftList[$i] - $rightList[$i]);
-            $totalDistance += $distance;
-        }
-
-        return $totalDistance;
+            return $carry;
+        }, 0);
     }
 
     /**
@@ -77,15 +74,15 @@ final class Solution
      */
     private static function calculateSimilarityScore(array $leftList, array $rightList): int
     {
-        // Calculate total distance between corresponding elements
-        $similarityScore = 0;
+        $index = 0;
 
-        foreach ($leftList as $value) {
+        return array_reduce($leftList, function (int $carry, int $value) use (&$index, $rightList): int {
             $matchedValues = array_filter($rightList, fn (int $rightValue): bool => $rightValue === $value);
             $score = count($matchedValues) * $value;
-            $similarityScore += $score;
-        }
+            $carry += $score;
+            $index++;
 
-        return $similarityScore;
+            return $carry;
+        }, 0);
     }
 }
