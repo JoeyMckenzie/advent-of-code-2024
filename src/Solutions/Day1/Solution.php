@@ -59,7 +59,7 @@ final class Solution
         sort($rightList);
         $index = 0;
 
-        return array_reduce($leftList, function (int $carry, int $value) use (&$index, $rightList): float|int {
+        return array_reduce($leftList, function (int $carry, int $value) use (&$index, $rightList): int {
             $distance = abs($value - $rightList[$index]);
             $carry += $distance;
             $index++;
